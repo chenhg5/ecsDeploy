@@ -13,7 +13,7 @@ func main() {
 	)
 	flag.StringVar(&op, "op", "deploy", "operation type")
 	flag.IntVar(&number, "number", 1, "number")
-	flag.StringVar(&configPath, "config path", "./config.ini", "config path")
+	flag.StringVar(&configPath, "cfg", "./config.ini", "config path")
 	flag.Parse()
 
 	config, _ := GetConfig(configPath, "project")
