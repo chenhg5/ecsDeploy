@@ -166,6 +166,32 @@ func (project *Project) createHost(number int, Ips []string) {
 	fmt.Println("\n创建成功。")
 }
 
+func (project *Project) GetIps() []string {
+	ecsClient := project.Client
+
+	checkReq := ecs.CreateDescribeInstancesRequest()
+
+	var tag = []ecs.DescribeInstancesTag{{
+		Key:   project.Tag1Key,
+		Value: time.Now().Format("20060102150405"),
+	}}
+	checkReq.Tag = &tag
+
+	checkRes, err := ecsClient.DescribeInstances(checkReq)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(checkRes)
+
+	var Ips= make([]string, len(checkRes.Instances.Instance))
+
+	for i := 0; i < len(checkRes.Instances.Instance); i++ {
+		Ips[i] = checkRes.Instances.Instance[i].VpcAttributes.PrivateIpAddress.IpAddress[0]
+	}
+
+	return Ips
+}
+
 func newClient(regionId, accessKey, accessKeySecret string) *ecs.Client {
 	ecsClient, err := ecs.NewClientWithAccessKey(
 		regionId,  // 地域ID
