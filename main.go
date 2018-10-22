@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"github.com/chenhg5/ecsDeploy/deploy"
 )
 
 func main() {
@@ -16,8 +17,8 @@ func main() {
 	flag.StringVar(&configPath, "cfg", "./config.ini", "config path")
 	flag.Parse()
 
-	config, _ := GetConfig(configPath, "project")
-	project := NewProject(config)
+	config, _ := deploy.GetConfig(configPath, "project")
+	project := deploy.NewProject(config)
 
 	// 部署新机器
 	if op == "deploy" {
