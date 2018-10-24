@@ -173,7 +173,6 @@ func (project *Project) GetIps() []string {
 
 	var tag = []ecs.DescribeInstancesTag{{
 		Key:   project.Tag1Key,
-		Value: time.Now().Format("20060102150405"),
 	}}
 	checkReq.Tag = &tag
 
