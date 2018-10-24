@@ -180,7 +180,6 @@ func (project *Project) GetIps() []string {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(checkRes)
 
 	var Ips= make([]string, len(checkRes.Instances.Instance))
 
